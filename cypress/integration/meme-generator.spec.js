@@ -27,19 +27,6 @@ const isOverEachother = (backgroundElement, forefrontElement) => {
   );
 };
 
-const isOnLowerHalf = (backgroundElement, forefrontElement) => {
-  backgroundElement.bottom = backgroundElement.top + backgroundElement.height;
-  backgroundElement.right = backgroundElement.left + backgroundElement.width;
-
-  forefrontElement.bottom = forefrontElement.top + forefrontElement.height;
-  forefrontElement.right = forefrontElement.left + forefrontElement.width;
-
-  return (
-    isOnSameHorizontal(backgroundElement, forefrontElement) &&
-    isOnSameVertical(backgroundElement, forefrontElement)
-  );
-};
-
 describe('Meme generator', function() {
   const checkFullOverlappage = (backgroundSelector, forefrontSelector) => {
     cy.document().then(doc => {
@@ -78,7 +65,7 @@ describe('Meme generator', function() {
     cy.contains(/^My awesome meme$/).should('be.visible');
 
     // Has one element inside another
-    checkFullOverlappage('#meme-image', '#meme-text');
+    checkFullOverlappage('#meme-image-container', '#meme-text');
   };
 
   const memeUpload = () => {
